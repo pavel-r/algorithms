@@ -1,4 +1,4 @@
-package structures.t0884_folding;
+package structures;
 
 import java.io.IOException;
 import java.nio.file.Path;

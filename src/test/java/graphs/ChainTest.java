@@ -1,4 +1,6 @@
-package graphs.t0741_chain;
+package graphs;
+
+import graphs.Chain;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,19 +14,21 @@ import common.Algorithm;
 import common.GeneralAlgorithmTest;
 
 @RunWith(Parameterized.class)
-public class AlgorithmTest extends GeneralAlgorithmTest{
+public class ChainTest extends GeneralAlgorithmTest {
 
 	@Parameters
-	public static Iterable<Object[]> data() throws IOException, URISyntaxException{
+	public static Iterable<Object[]> data() throws IOException,
+			URISyntaxException {
 		return GeneralAlgorithmTest.readFiles("/graphs/t0741_chain");
 	}
 
-	public AlgorithmTest(Path inputPath, Path outputPath){
+	public ChainTest(Path inputPath, Path outputPath) {
 		super(inputPath, outputPath);
 	}
-	
+
 	@Override
 	public Algorithm doGetAlgorithmInstance() {
 		return new Chain();
 	}
+
 }

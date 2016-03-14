@@ -1,4 +1,4 @@
-package structures.t0884_folding;
+package recursion;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,19 +12,21 @@ import common.Algorithm;
 import common.GeneralAlgorithmTest;
 
 @RunWith(Parameterized.class)
-public class AlgorithmTest extends GeneralAlgorithmTest{
+public class ComposedWordsTest extends GeneralAlgorithmTest {
 
 	@Parameters
-	public static Iterable<Object[]> data() throws IOException, URISyntaxException{
-		return GeneralAlgorithmTest.readFiles("/structures/t0884_folding");
+	public static Iterable<Object[]> data() throws IOException,
+			URISyntaxException {
+		return GeneralAlgorithmTest.readFiles("/recursion/composed_words");
 	}
 
-	public AlgorithmTest(Path inputPath, Path outputPath){
+	public ComposedWordsTest(Path inputPath, Path outputPath) {
 		super(inputPath, outputPath);
 	}
-	
+
 	@Override
 	public Algorithm doGetAlgorithmInstance() {
-		return new Folding();
+		return new ComposedWords();
 	}
+
 }

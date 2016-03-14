@@ -1,4 +1,4 @@
-package graphs.t0741_chain;
+package graphs;
 
 import java.io.IOException;
 import java.nio.file.Path;
