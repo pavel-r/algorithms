@@ -6,9 +6,11 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import common.Algorithm;
 
@@ -38,17 +40,17 @@ public class ComposedWords implements Algorithm {
 		//words.stream().forEach(System.out::println);
 
 		seedWords.add(words.get(0));
-		String longestComposable = words.stream().skip(1).map(w -> {
+		Optional<String> longestComposed = words.stream().skip(1).map(w -> {
 			if(isComposable(w)){
 				return w;
 			} else {
 				seedWords.add(w);
-				return "";
+				return null;
 			}
-		}).reduce(words.get(0), (longest, w) -> w.length() > longest.length() ? w : longest);
+		}).filter(w -> w != null).reduce((longest, w) -> w.length() > longest.length() ? w : longest);
 		
-		System.out.println("Longest: " + longestComposable);
-		return Arrays.asList(longestComposable);
+//		System.out.println("Longest: " + longestComposable);
+		return longestComposed.map(Arrays::asList).orElse(Arrays.asList());
 	}
 
 }
