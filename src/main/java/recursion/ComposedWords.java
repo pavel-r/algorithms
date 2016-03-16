@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import static java.util.function.BinaryOperator.maxBy;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -35,7 +37,8 @@ public class ComposedWords implements Algorithm {
 	@Override
 	public List<String> run() {
 		//sort by word length
-		words.sort((a, b) -> a.length() - b.length());
+		Comparator<String> byLength = (a, b) -> a.length() - b.length();
+		words.sort(byLength);
 
 		seedWords.add(words.get(0));
 		Optional<String> longestComposed = words.stream().skip(1).map(w -> {
@@ -45,7 +48,7 @@ public class ComposedWords implements Algorithm {
 				seedWords.add(w);
 				return null;
 			}
-		}).filter(w -> w != null).reduce((longest, w) -> w.length() > longest.length() ? w : longest);
+		}).filter(w -> w != null).reduce(maxBy(byLength));
 
 		return longestComposed.map(Arrays::asList).orElse(Arrays.asList());
 	}
