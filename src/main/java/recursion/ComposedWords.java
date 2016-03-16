@@ -37,7 +37,7 @@ public class ComposedWords implements Algorithm {
 	@Override
 	public List<String> run() {
 		//sort by word length
-		Comparator<String> byLength = (a, b) -> a.length() - b.length();
+		Comparator<String> byLength = (a, b) -> Integer.compare(a.length(), b.length());
 		words.sort(byLength);
 
 		seedWords.add(words.get(0));
