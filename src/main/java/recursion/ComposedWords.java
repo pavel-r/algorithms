@@ -18,7 +18,7 @@ public class ComposedWords implements Algorithm {
 	private List<String> words;
 
 	private final Set<String> seedWords = new HashSet<>();
-	
+
 	@Override
 	public void readParameters(Path path) throws IOException {
 		words = Files.lines(path).collect(Collectors.toList());
@@ -28,15 +28,14 @@ public class ComposedWords implements Algorithm {
 		return IntStream.rangeClosed(1, s.length()).anyMatch(i -> {
 			final String first = s.substring(0, i);
 			final String second = s.substring(i, s.length());
-			//System.out.println("Checking " + first + " and " + second);
 			return seedWords.contains(first) && (second.isEmpty() || isComposable(second));
 		});
 	}
-	
+
 	@Override
 	public List<String> run() {
-		words.sort((a, b) -> a.length() == b.length() ? a.compareTo(b) : a.length() - b.length());
-		//words.stream().forEach(System.out::println);
+		//sort by word length
+		words.sort((a, b) -> a.length() - b.length());
 
 		seedWords.add(words.get(0));
 		Optional<String> longestComposed = words.stream().skip(1).map(w -> {
@@ -47,8 +46,7 @@ public class ComposedWords implements Algorithm {
 				return null;
 			}
 		}).filter(w -> w != null).reduce((longest, w) -> w.length() > longest.length() ? w : longest);
-		
-//		System.out.println("Longest: " + longestComposable);
+
 		return longestComposed.map(Arrays::asList).orElse(Arrays.asList());
 	}
 
