@@ -8,12 +8,12 @@ import java.util.Scanner;
 
 import common.Algorithm;
 
-public class task12 implements Algorithm{
+public class BinarySequences implements Algorithm{
 
 	private String a;
 	private String b;
 	private int[][] matrix;
-	
+
 	@Override
 	public void readParameters(Path path) throws IOException {
 		try(Scanner scanner = new Scanner(path)){

@@ -8,17 +8,18 @@ import java.util.Scanner;
 
 import common.Algorithm;
 
-public class task2 implements Algorithm{
+public class Coins implements Algorithm{
 
 	private int[] buyCoins;
 	private int[] sellCoins;
 	private byte[] temp;
 	private int S;
 
+	@Override
 	public List<String> run(){
 		return calculate() ? Arrays.asList("Yes") : Arrays.asList("No");
 	}
-	
+
 	private boolean calculate() {
 		for(int i=0; i < buyCoins.length; i++){
 			for(int j=temp.length -1; j>=0; j--){
@@ -44,6 +45,7 @@ public class task2 implements Algorithm{
 		return false;
 	}
 
+	@Override
 	public void readParameters(Path path) throws IOException {
 		try (Scanner scanner = new Scanner(path)){
 			buyCoins = new int[scanner.nextInt()];

@@ -6,7 +6,7 @@ import java.util.*;
 
 import common.Algorithm;
 
-public class task3 implements Algorithm {
+public class MatrixPath implements Algorithm {
 
 	public static int[][] matrix;
 	public static int n;
