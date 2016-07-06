@@ -9,11 +9,6 @@ def read_infile(file_name):
     return [int(n) for n in f.read().split()[1:]]
 
 
-def read_outfile(filename):
-    f = open(filename, 'rU')
-    return f.read()
-
-
 def calculate_max_sequence(array):
     n = len(array)
     sorted_array = sorted(array, key=abs)
@@ -36,6 +31,17 @@ def test(got, expected):
     print '%s got: %s expected: %s' % (prefix, repr(got), repr(expected))
 
 
+def file_as_str(filename):
+    f = open(filename, 'rU')
+    return f.read()
+
+
+def in_match_out(infilename, outfilename):
+    (infile, inext) = os.path.splitext(infilename)
+    (outfile, outext) = os.path.splitext(outfilename)
+    return outfile == infile.replace('in', 'out', 1)
+
+
 # If input file specified then it prints the result of the algorithm
 # Otherwise it tests all input/output files in ./tests folder
 def main():
@@ -45,14 +51,14 @@ def main():
         print calculate_max_sequence(array)
     else:
         filenames = os.listdir('tests')
-        infiles = [f for f in filenames if f.startswith('input')]
-        outfiles = [f for f in filenames if f.startswith('output')]
+        infiles = [f for f in filenames if f.startswith('in')]
+        outfiles = [f for f in filenames if f.startswith('out')]
         files = [(os.path.join('tests', infile), os.path.join('tests', outfile)) for infile in infiles for outfile in
-                 outfiles if infile.replace('input', 'output', 1) == outfile]
+                 outfiles if in_match_out(infile, outfile)]
         for infile, outfile in files:
             print infile, outfile
             array = read_infile(infile)
-            test(calculate_max_sequence(array), int(read_outfile(outfile)))
+            test(calculate_max_sequence(array), int(file_as_str(outfile)))
 
 
 if __name__ == '__main__':
