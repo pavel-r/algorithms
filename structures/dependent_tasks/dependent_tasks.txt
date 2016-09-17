@@ -1,4 +1,6 @@
-Number of tasks depend on each other
-Input file: firs line contains 'n' number of tasks
-Following lines contain dependencies with is two numbers per line 'i j'
- which means that i depends on j
+There are several tasks that depend on each other.
+Input:
+First line of the input file contains number of tasks 'n'.
+Following lines contain dependencies between tasks. Each line with two numbers 'i j' means that i depends on j.
+Output:
+List of tasks in one of the correct orders or throw exception if not possible.
