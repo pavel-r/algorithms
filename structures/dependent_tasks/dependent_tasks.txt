@@ -1,0 +1,4 @@
+Number of tasks depend on each other
+Input file: firs line contains 'n' number of tasks
+Following lines contain dependencies with is two numbers per line 'i j'
+ which means that i depends on j
